@@ -3,22 +3,20 @@
 #include <iostream>
 
 namespace json {
-    Parser::Parser() {
-        std::cout << "parser" << std::endl;
+    void Parser::setPattern(const std::string &pattern) {
+        _pattern = pattern;
     }
 
-    Parser::~Parser() {
-        std::cout << "parser delete" << std::endl;
-    }
-
-
-    bool Parser::parse() {
-        const std::string json_pattern =
-                R"(\[\{"UserID":[0-9]{1,64},
-                "UserName":".{1,64}",
-                "UserSurname":".{1,64}",
-                "RegistrationDate":".{1,32}",
-                "Password":".{1,128}"\}\])";
-        return false;
+    std::vector<std::string> &Parser::parse(std::ifstream &file) {
+        std::string line;
+        while (std::getline(file, line)) {
+            std::sregex_iterator it(line.begin(), line.end(), _pattern);
+            std::sregex_iterator it_end;
+            for (; it != it_end; ++it) {
+                std::cout << it->str() << std::endl;
+                _objects.push_back(it->str());
+            }
+        }
+        return _objects;
     }
 }
