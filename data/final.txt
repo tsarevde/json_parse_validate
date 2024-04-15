@@ -7,25 +7,11 @@
 		"Password": "LG5158644182"
 	},
 	{
-		"UserID": 2,
-		"UserName": "Вячеслав",
-		"UserSurname": "Фамилин",
-		"RegistrationDate": "31.12.2022",
-		"Password": "Pawd_78954811254"
-	},
-	{
 		"UserID": 4,
 		"UserName": "Татьяна",
 		"UserSurname": "Шилова",
 		"RegistrationDate": "22.04.2023",
 		"Password": "46874548425484_Dmut"
-	},
-	{
-		"UserID": 1,
-		"UserName": "Павел",
-		"UserSurname": "Шуриков",
-		"RegistrationDate": "12.11.2021",
-		"Password": "123456789Test"
 	},
 	{
 		"UserID": 5,

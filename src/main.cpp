@@ -2,6 +2,7 @@
 
 #include "parser.h"
 #include "file.h"
+#include "filter.h"
 
 int main(int argc, char *  argv[]) {
     setlocale(LC_ALL, "ru");
@@ -31,11 +32,15 @@ int main(int argc, char *  argv[]) {
         dataset_parser.setPattern(parse_pattern);
 
         // Парсим список пользователей
-        const auto &data = dataset_parser.parse(dataset_file.get());
+        auto &data = dataset_parser.parse(dataset_file.get());
         if (data.empty()) {
             std::cout << "Корректные данные о пользователях не найдены!" << std::endl;
             return 0;
         }
+
+        // Можно использовать отдельный модель для обработки данных,
+        // например удалить карточки до 2023 года
+        json::Filter::removeUsersBeforeYear(data, 2023);
 
         // Открываем файл и сохраняем карточки пользователей
         core::File<std::ofstream> save_file(save_path);
