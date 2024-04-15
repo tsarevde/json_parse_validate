@@ -11,7 +11,7 @@ namespace json {
         const std::regex pattern("\"UserID\":(\\d+),\"UserName\":\"([^\"]+)\",\"UserSurname\":\"([^\"]+)\",\"RegistrationDate\":\"([^\"]+)\",\"Password\":\"([^\"]+)\"");
         std::smatch matches;
         if (std::regex_search(string, matches, pattern)) {
-            json::User user;
+            json::structures::User user;
             user.UserID = std::stoi(matches[1]);
             user.UserName = matches[2];
             user.UserSurname = matches[3];
@@ -23,7 +23,7 @@ namespace json {
         }
     }
 
-    std::vector<User> &Parser::parse(std::ifstream &file) {
+    std::vector<structures::User> &Parser::parse(std::ifstream &file) {
         std::string line;
         while (std::getline(file, line)) {
             std::sregex_iterator it(line.begin(), line.end(), _pattern);
