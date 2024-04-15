@@ -39,9 +39,21 @@ int main(int argc, char *  argv[]) {
 
         // Открываем файл и сохраняем карточки пользователей
         core::File<std::ofstream> save_file(save_path);
-        for (const auto& obj : data) {
-            save_file.save(obj);
+        save_file.get() << "[" << std::endl;
+        for (size_t i = 0; i < data.size(); ++i) {
+            save_file.get() << "\t{\n";
+            save_file.get() << "\t\t\"UserID\": " << data[i].UserID << ",\n";
+            save_file.get() << "\t\t\"UserName\": \"" << data[i].UserName << "\",\n";
+            save_file.get() << "\t\t\"UserSurname\": \"" << data[i].UserSurname << "\",\n";
+            save_file.get() << "\t\t\"RegistrationDate\": \"" << data[i].RegistrationDate << "\",\n";
+            save_file.get() << "\t\t\"Password\": \"" << data[i].Password << "\"\n";
+            save_file.get() << "\t}";
+            if (i != data.size() - 1) {
+                save_file.get() << ",";
+            }
+            save_file.get() << std::endl;
         }
+        save_file.get() << "]" << std::endl;
     } catch (const std::string &e) {
         // Просто падаем с ошибкой)
         std::cout << e << std::endl;
